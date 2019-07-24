@@ -1,0 +1,42 @@
+#include <NewPing.h>
+
+#define TRIGGER_PIN  4  
+#define ECHO_PIN     3  
+#define MAX_DISTANCE 200
+
+NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);
+
+void setup() {
+  pinMode(8,OUTPUT); // vibrator
+  pinMode(10,OUTPUT); // buzzer
+  Serial.begin(115200);
+}
+
+void loop() {
+ // delay(100);                     
+  Serial.print("Ping: ");
+  Serial.print(sonar.ping_cm()); 
+  Serial.println("cm");
+  int a = digitalRead(6); // lightsensor
+  int n = sonar.ping_cm();
+
+  if(n < 80)
+  {
+    digitalWrite(8,HIGH);
+    }
+    else
+    {
+      digitalWrite(8,LOW);
+      } 
+
+  
+
+  if(a==0)
+  {
+    digitalWrite(10,HIGH);
+    }
+    else if(a==1)
+    {
+      digitalWrite(10,LOW);
+      }
+}
